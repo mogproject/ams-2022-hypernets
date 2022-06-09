@@ -32,6 +32,7 @@ def main(args):
     if args.type == 'gram':
         print(f'[Grammates: n={args.n}, m={args.m}]')
         lib.print_nontrivial_grammates(args.n, args.m)
+        print('Done')
     elif args.type == 'clique':
         print(f'[Cliquemates: n={args.n}, max_m={args.m}]')
         ret = lib.get_largest_cliquemates(args.n, args.m)
