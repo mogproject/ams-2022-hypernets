@@ -1,0 +1,2 @@
+[Grammates: n=10, m=2]
+Done

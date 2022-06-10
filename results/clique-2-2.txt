@@ -1,0 +1,3 @@
+[Cliquemates: n=2, max_m=2]
+size: 1
+[(2, 2, 0)]
