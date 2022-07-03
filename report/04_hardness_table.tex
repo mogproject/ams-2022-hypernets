@@ -1,0 +1,70 @@
+\begin{table*}[ht]
+  \centering
+  \small
+
+  \begin{tabular}{|c|c|p{0.18\textwidth}|p{0.18\textwidth}|p{0.3\textwidth}|p{0.18\textwidth}|}
+    \hline
+    \#
+    &Given
+    &\multicolumn{1}{c|}{Given $B$} 
+    &\multicolumn{1}{c|}{Find $A$} 
+    &\multicolumn{1}{c|}{Problem / Interpretation}
+    &\multicolumn{1}{c|}{Hardness}
+    \\
+    \hline
+    (1) & $m \in \N$ & $B \in \{0,1,\star \}^{n \times n}$,\newline $b_{i,i}=\star\quad\forall i$
+     & $A \in \{0,1\}^{n \times m}$,\newline $B\stackrel{\star}{=}AA^T$
+     & Edge Clique Partition of a graph with $n$ vertices; decompose all edges into a set of $m$ cliques (if such one exists).
+     & NP-hard \cite{shaohan1988complexity}\\
+    \hline
+    (2) & $m \in \N$ & $B \in (\Z^\star)^{n \times n}$,\newline $b_{i,i}=\star \quad\forall i$
+     & $A \in \{0,1\}^{n \times m}$,\newline $B\stackrel{\star}{=}AA^T$
+     & Weighted Edge Clique Partition of a graph with $n$ vertices
+     (equivalently, Edge Clique Partition on a multigraph without loops);
+     decompose all weighted edges into a multiset of $m$ cliques.
+     & NP-hard \cite{feldmann_fixed-parameter_2020,cooley_parameterized_2021}\\
+    \hline
+    (3) & $m \in \N$ & $B \in \Z^{n \times n}$
+    & $A \in \{0,1\}^{n \times m}$,\newline $B=AA^T$
+    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices and $m$ hyperedges.
+    (b) Recovering a hypergraph with $m$ vertices and $n$ hyperedges from the given weighted line graph.
+    & \textcolor{blue}{NP-hard}\\
+    \hline
+    (4) & --- & $B \in (\Z^\star)^{n \times n}$,\newline $b_{i,i}=\star \quad\forall i$
+    & $A \in \{0,1\}^{n \times m}$,\newline $B\stackrel{\star}{=}AA^T$
+    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices 
+    and \textit{any number of} hyperedges, \textbf{ignoring the diagonal entries in $B$ (vertex weights)}.
+    (b) Recovering a hypergraph with \textit{any number of} vertices and 
+    $n$ hyperedges from the given weighted line graph, ignoring the diagonal entries in $B$.
+    & \textcolor{blue}{P}\\
+    \hline
+    (5) & --- & $B \in \Z^{n \times n}$
+    & $A \in \{0,1\}^{n \times m}$,\newline $B=AA^T$
+    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices and \textit{any number of} hyperedges.
+    (b) Recovering a hypergraph with \textit{any number of} vertices and $n$ hyperedges from the given weighted line graph.
+    & Open? Literature survey needed.\\
+    \hline
+    (6) & $k \in \N$ & $B \in \Z^{n \times n}$
+    & $A \in \{0,1\}^{n \times m}$,\newline 
+    $\|A_{i,*}\|_0=k\quad\forall i$,\newline
+    $B=AA^T$
+    & (a) Weighted Clique Decomposition of a $k$-\textbf{regular} hypergraph with $n$ vertices.
+    (b) Recovering a $k$-\textbf{uniform} hypergraph with $n$ hyperedges from the given weighted line graph.
+    & P when $k=2$ \cite{roussopoulos_max_1973,lehot_optimal_1974,syslo_labeling_1982,degiorgi_dynamic_1995,liu_iligra_2015};\newline
+    NP-hard when $k \geq 3$ \cite{poljak_complexity_1981,chen_symmetric_2022}\\
+    \hline
+    (7) & $k \in \N$ & $B \in \Z^{n \times n}$
+    & $A \in \{0,1\}^{n \times m}$,\newline 
+    $\|A_{*,j}\|_0=k\quad \forall j$,\newline
+    $B=AA^T$
+    & (a) Weighted Clique Decomposition of a $k$-\textbf{uniform} hypergraph with $n$ vertices.
+    (b) Recovering a $k$-\textbf{regular} hypergraph with $n$ hyperedges from the given weighted line graph.
+    & Open? Literature survey needed.\\
+    \hline
+  \end{tabular}
+
+  \caption{%
+  Known and established hardness results (new results in blue).
+  }
+  \label{tab:hardness}
+\end{table*}

@@ -18,9 +18,14 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
 
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
 \usepackage{graphicx}
 \usepackage{amsfonts, amsmath}
 \usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{cleveref}
 
 \usepackage{geometry}
 \geometry{margin=1in}
@@ -267,9 +272,7 @@ Everett and Borgatti say that if the reconstructed matrix from the algorithm is 
 Is the $7 \times 7$ example in Kim and Kirkland \cite{Kirkland} the smallest gram mate?
 \end{question}
 
-\section{Hardness Results}
-
-%TODO[Yo]
+\input{04_hardness.tex}
 
 \section{Software}
 

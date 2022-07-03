@@ -1,0 +1,40 @@
+\section{Hardness Results}
+
+We consider several variants of the Boolean matrix factorization problem:
+ given a symmetric square matrix $B \in \Z^{n \times n}$, find $A \in \{0,1\}^{n \times m}$ such that $B=AA^T$ or similar conditions.
+We here use Feldmann et al.'s notation \cite{feldmann_fixed-parameter_2020}.
+%
+We allow matrices to have wildcard entries in the diagonal that will be denoted by $\star$.
+We define $\Z^\star := \Z_{\geq 0} \cup \{\star\}$.
+For $x, y \in \Z$, we write $x \stackrel{\star}{=} y$ if and only if either $x=y$, or at least one of $x$ and $y$ is $\star$.
+For two matrices $X$ and $Y$ in $(\Z^\star)^{m\times n}$, we write $X \stackrel{\star}{=} Y$
+ if and only if $X_{i,j} \stackrel{\star}{=} Y_{i,j}$ for all $i$, $j$.
+Further, $\|\cdot\|_0$ denotes the number of nonzero entries.
+%
+\Cref{tab:hardness} summarizes known and newly established hardness results.
+
+\input{04_hardness_table.tex}
+
+\begin{thm}\label{thm:hardness-bounded}
+  Problem (3) in \Cref{tab:hardness} is NP-hard.
+\end{thm}
+
+\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-bounded}]
+  TODO: Yo
+\end{proof}
+
+\begin{thm}\label{thm:hardness-unbounded}
+  Problem (4) in \Cref{tab:hardness} can be solved in polynomial time in $n$.
+\end{thm}
+
+\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-unbounded}]
+  Consider this problem as Weighted Clique Decomposition.
+  %
+  First, observe that adding a clique of size 1 does not change the feasibility
+  because the diagonal entries in $B$ are ignored.
+  If the instance is feasible, then there must exist a solution without a clique of size 1.
+  %
+  Therefore, it is enough to construct a set of cliques of size 2 in a greedy manner.
+  %
+  This construction will require $\sum_{1 \leq i < j \leq n}b_{i,j}$ cliques.
+\end{proof}
