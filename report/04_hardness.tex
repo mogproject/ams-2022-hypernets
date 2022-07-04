@@ -83,11 +83,11 @@ Further, $\|\cdot\|_0$ denotes the number of nonzero entries.
   which gives the required solution for X3C.
 \end{proof}
 
-\begin{thm}\label{thm:hardness-unbounded}
+\begin{thm}\label{thm:hardness-unbounded-ignore-diag}
   Problem (4) in \Cref{tab:hardness} can be solved in polynomial time in $n$.
 \end{thm}
 
-\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-unbounded}]
+\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-unbounded-ignore-diag}]
   Consider this problem as Weighted Clique Decomposition.
   %
   First, observe that adding a clique of size 1 does not change the feasibility
@@ -98,3 +98,84 @@ Further, $\|\cdot\|_0$ denotes the number of nonzero entries.
   %
   This construction will require $\sum_{1 \leq i < j \leq n}b_{i,j}$ cliques.
 \end{proof}
+
+\begin{thm}\label{thm:hardness-unbounded}
+  Problem (5) in \Cref{tab:hardness} is NP-hard.
+\end{thm}
+
+\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-unbounded}]
+  We use the same construction as in the proof of Theorem~\ref{thm:hardness-bounded}.
+  Given the construction of a $K_4$-free graph $G$, we claim that the number of cliques is
+  determined by the diagonal entries of $B$.
+
+  Let $y_i(u)$ be the number of cliques of size $i$ incident to vertex $u$.
+  Because $G$ is $K_4$-free and all edges have unit weight, we have $b_{u,u} = y_1(u) + y_2(u) + y_3(u)$ and 
+  $\deg_G(u) = y_2(u) + 2 y_3(u)$. Trivially, we get $\deg_G(u)-b_{u,u} \leq y_3(u) \leq \deg_G(u) /2$.
+
+  For each element-vertex $u$, we have $b_{u,u}=(\deg_G(u)+1)/2$, so $y_3(u)=(\deg_G(u)-1)/2$,
+  which then determines $y_1(u)=0$ and $y_2(u)=1$ (note that $\deg_G(u)$ is always odd).
+  %
+  For each element-vertex $u'$, we have $b_{u',u'}=\deg_G(u')-1$,
+  but since $N(u') \setminus u$ is independent, $y_3(u') \leq 1$.
+  The only feasible case is $y_1(u')=0$, $y_2(u')=\deg_G(u')-2$, and $y_3(u')=1$.
+  %
+  For each set-vertex $a_i$ ($b_i,c_i$), we have $b_{a_i,a_i}=3$ and $\deg_G(a_i)=5$,
+  which determines $y_1(a_i)=0$, $y_2(a_i)=1$, and $y_3(a_i)=2$.
+  %
+  Overall, we must have ($3\ell + q$) $K_3$'s, $3\ell$ $K_2$'s, and no $K_1$'s to cover $12\ell + 3q$ edges of $G$.
+  The total number of cliques is $6\ell + q$.
+\end{proof}
+
+\begin{thm}\label{thm:hardness-regular}
+  Problem (8) in \Cref{tab:hardness} is NP-hard.
+\end{thm}
+
+\begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-regular}]
+  We use the same construction as in the proof of Theorem~\ref{thm:hardness-unbounded}.
+  Let $k$ be an odd number such that $b_{i,i} \leq k$ for every $i$.
+  We construct an augmented graph $G'$ from $G$ such that every vertex in $G'$ is incident
+  to exactly $k$ cliques (in polynomial time). The edges in $G'$ also have unit weight.
+
+  For every vertex $i$ in $G$ such that $b_{i,i} < k$, add ($k-b_{i,i}$) copies of
+  the $K_3$-free gadget shown in \Cref{fig:regular-gadget} and add an edge from $i$ to $r$ of each gadget.
+  Note that every vertex in the gadget has degree $k$,
+  and requiring incident $k$ cliques forces to pick all incident $K_2$'s.
+\end{proof}
+
+\begin{figure}[ht]
+  \centering
+  \tikzstyle{small} = [circle, fill=white, text=black, draw, thick, scale=1, minimum size=0.2cm, inner sep=1.5pt]
+
+  \begin{tikzpicture}
+    % Nodes
+    \node[small,label=above left:r] (r) at (7.5, 12) {};
+    \foreach \i in {1,...,6} {
+      \node[small] (x\i) at (-3 + 3 * \i, 10) {};
+      \foreach \j in {1,...,3} {
+        \node[small] (y\j\i) at (-5.2 + 6 * \j, 3 + \i) {};
+        \node[small] (z\j\i) at (-3.8 + 6 * \j, 3 + \i) {};
+      }
+    }
+    % Edges
+    \draw (r) -- (7.5,13);
+    \foreach \i in {1,...,6} {
+      \draw (r) -- (x\i);
+      \draw (x1) -- (y1\i);
+      \draw (x2) -- (z1\i);
+      \draw (x3) -- (y2\i);
+      \draw (x4) -- (z2\i);
+      \draw (x5) -- (y3\i);
+      \draw (x6) -- (z3\i);
+      \foreach \j in {1,...,6} {
+        \foreach \k in {1,...,3} \draw (y\k\i) -- (z\k\j);
+      }
+    }
+    % Annotations
+    \draw[rounded corners, dashed] (-0.5, 9.7) rectangle ++ (16, 0.6);
+    \node at (16, 10.6) {$k-1$ vertices};
+    \draw[rounded corners, dashed] (0.5, 3.7) rectangle ++ (2, 5.6);
+    \node at (2,3.3) {biclique $K_{k-1,k-1}$};
+  \end{tikzpicture}
+  \caption{$K_3$-free $k$-regular gadget.}
+  \label{fig:regular-gadget}
+\end{figure}

@@ -2,7 +2,7 @@
   \centering
   \small
 
-  \begin{tabular}{|c|c|p{0.18\textwidth}|p{0.18\textwidth}|p{0.3\textwidth}|p{0.18\textwidth}|}
+  \begin{tabular}{|c|p{0.07\textwidth}|p{0.16\textwidth}|p{0.18\textwidth}|p{0.3\textwidth}|p{0.18\textwidth}|}
     \hline
     \#
     &Given
@@ -26,13 +26,16 @@
     \hline
     (3) & $m \in \N$ & $B \in \Z^{n \times n}$
     & $A \in \{0,1\}^{n \times m}$,\newline $B=AA^T$
-    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices and $m$ hyperedges.
+    & (a) WCD of a hypergraph with $n$ vertices and $m$ hyperedges.
     (b) Recovering a hypergraph with $m$ vertices and $n$ hyperedges from the given weighted line graph.
-    & \textcolor{blue}{NP-hard}\\
+    & \textcolor{blue}{NP-hard}\newline
+    even if the graph representation of $B$ is $K_4$-free and has unit weight on edges\newline
+    (i.e. $b_{i,j} \in \{0,1\}$ if $i\neq j$).
+    \\
     \hline
     (4) & --- & $B \in (\Z^\star)^{n \times n}$,\newline $b_{i,i}=\star \quad\forall i$
     & $A \in \{0,1\}^{n \times m}$,\newline $B\stackrel{\star}{=}AA^T$
-    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices 
+    & (a) WCD of a hypergraph with $n$ vertices 
     and \textit{any number of} hyperedges, \textbf{ignoring the diagonal entries in $B$ (vertex weights)}.
     (b) Recovering a hypergraph with \textit{any number of} vertices and 
     $n$ hyperedges from the given weighted line graph, ignoring the diagonal entries in $B$.
@@ -40,31 +43,39 @@
     \hline
     (5) & --- & $B \in \Z^{n \times n}$
     & $A \in \{0,1\}^{n \times m}$,\newline $B=AA^T$
-    & (a) Weighted Clique Decomposition of a hypergraph with $n$ vertices and \textit{any number of} hyperedges.
+    & (a) WCD of a hypergraph with $n$ vertices and \textit{any number of} hyperedges.
     (b) Recovering a hypergraph with \textit{any number of} vertices and $n$ hyperedges from the given weighted line graph.
-    & Open? Literature survey needed.\\
+    & \textcolor{blue}{NP-hard}\\
     \hline
-    (6) & $k \in \N$ & $B \in \Z^{n \times n}$
+    (6) & --- &$B \in \Z^{n \times n}$
+    & $A \in \{0,1\}^{n \times m}$,\newline 
+    $\|A_{i,*}\|_0=2\quad\forall i$,\newline
+    $B=AA^T$
+    & (a) WCD of a $2$-\textbf{regular} hypergraph with $n$ vertices.
+    (b) Recovering a $2$-\textbf{uniform} hypergraph (i.e. a graph) with $n$ edges from the given weighted line graph.
+    & P\cite{roussopoulos_max_1973,lehot_optimal_1974,syslo_labeling_1982,degiorgi_dynamic_1995,liu_iligra_2015}\\
+    \hline
+    (7) & $k \in \N$,\newline$k \geq 3$ & $B \in \Z^{n \times n}$
     & $A \in \{0,1\}^{n \times m}$,\newline 
     $\|A_{i,*}\|_0=k\quad\forall i$,\newline
     $B=AA^T$
-    & (a) Weighted Clique Decomposition of a $k$-\textbf{regular} hypergraph with $n$ vertices.
+    & (a) WCD of a $k$-\textbf{regular} hypergraph with $n$ vertices.
     (b) Recovering a $k$-\textbf{uniform} hypergraph with $n$ hyperedges from the given weighted line graph.
-    & P when $k=2$ \cite{roussopoulos_max_1973,lehot_optimal_1974,syslo_labeling_1982,degiorgi_dynamic_1995,liu_iligra_2015};\newline
-    NP-hard when $k \geq 3$ \cite{poljak_complexity_1981,chen_symmetric_2022}\\
+    & NP-hard \cite{poljak_complexity_1981,chen_symmetric_2022}\\
     \hline
-    (7) & $k \in \N$ & $B \in \Z^{n \times n}$,\newline $b_{i,i}=k \quad\forall i$
+    (8) & $k \in \N$ & $B \in \Z^{n \times n}$,\newline $b_{i,i}=k \quad\forall i$
     & $A \in \{0,1\}^{n \times m}$,\newline 
     $B=AA^T$
-    & (a) Weighted Clique Decomposition of a $k$-\textbf{uniform} hypergraph with $n$ vertices.
+    & (a) WCD of a $k$-\textbf{uniform} hypergraph with $n$ vertices.
     (b) Recovering a $k$-\textbf{regular} hypergraph with $n$ hyperedges from the given weighted line graph.\newline
     Notice that $b_{i,i}=k$ if and only if $\|A_{*,j}\|_0=k$.
-    & Open? Literature survey needed.\\
+    & \textcolor{blue}{NP-hard}\\
     \hline
   \end{tabular}
 
   \caption{%
   Known and established hardness results (new results in blue).
+  WCD stands for Weighted Clique Decomposition.
   }
   \label{tab:hardness}
 \end{table*}
