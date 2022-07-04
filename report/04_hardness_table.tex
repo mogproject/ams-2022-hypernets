@@ -53,12 +53,12 @@
     & P when $k=2$ \cite{roussopoulos_max_1973,lehot_optimal_1974,syslo_labeling_1982,degiorgi_dynamic_1995,liu_iligra_2015};\newline
     NP-hard when $k \geq 3$ \cite{poljak_complexity_1981,chen_symmetric_2022}\\
     \hline
-    (7) & $k \in \N$ & $B \in \Z^{n \times n}$
+    (7) & $k \in \N$ & $B \in \Z^{n \times n}$,\newline $b_{i,i}=k \quad\forall i$
     & $A \in \{0,1\}^{n \times m}$,\newline 
-    $\|A_{*,j}\|_0=k\quad \forall j$,\newline
     $B=AA^T$
     & (a) Weighted Clique Decomposition of a $k$-\textbf{uniform} hypergraph with $n$ vertices.
-    (b) Recovering a $k$-\textbf{regular} hypergraph with $n$ hyperedges from the given weighted line graph.
+    (b) Recovering a $k$-\textbf{regular} hypergraph with $n$ hyperedges from the given weighted line graph.\newline
+    Notice that $b_{i,i}=k$ if and only if $\|A_{*,j}\|_0=k$.
     & Open? Literature survey needed.\\
     \hline
   \end{tabular}

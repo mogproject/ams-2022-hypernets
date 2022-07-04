@@ -20,7 +20,67 @@ Further, $\|\cdot\|_0$ denotes the number of nonzero entries.
 \end{thm}
 
 \begin{proof}[Proof Sketch of Theorem~\ref{thm:hardness-bounded}]
-  TODO: Yo
+  We use the same construction as given by \cite{cooley_parameterized_2021,shaohan1988complexity}.
+  We will show that Problem (3) in \Cref{tab:hardness} is NP-hard by a reduction from 
+  \textsc{Exact Cover by 3-Sets (X3C)}.
+  In this problem, we are given a universe $U$ of $3q$ elements and a collection
+  $\mathcal{S}=\{S_1,S_2,\ldots,S_\ell\}$ of $\ell$ 3-ary subsets of $U$.
+  The decision problem asks whether there exist $q$ sets in $\mathcal{S}$ that cover the entire $U$.
+  % Without loss of generality, we assume $U=\{1,2,\ldots,3q\}$ and $S_i = \{x_i, y_i, z_i\}$ for each $i$.
+
+  Given an instance of X3C, we construct an auxiliary graph $G$ as follows.
+  %
+  For each element $u\in U$, we introduce two vertices $u, u'$ and have an edge $uu'$ in $G$.
+  We call these vertices and edges the \textit{element-vertices} and \textit{element-edges}, respectively.
+  %
+  For each set $S_i=\{u,v,w\}$ in $\mathcal{S}$, we will have three vertices $a_i, b_i, c_i$ that
+  form a triangle. We call these vertices \textit{set-vertices}.
+  Then, we connect this triangle to the element edges by adding the following 9 edges:
+  $a_i u, a_i u', a_i v, b_i v, b_i v', b_i w, c_i w, c_i w', c_i u$.
+
+  We now construct a matrix $B \in \Z^{n \times n}$, where each row/column corresponds to 
+  a vertex in $G$. There are $n = 6q + 3\ell$ vertices.
+  For every distinct $i, j$, let $b_{i,j} = 1$ if $G$ has an edge between $i$ and $j$;
+  otherwise, $b_{i,j}=0$.
+  Finally, for every element-vertex $u$, set $b_{u,u}=(\deg_G(u) + 1)/2$
+  for $u'$, set $b_{u',u'}=\deg_G(u')-1$, and 
+  for every set-vertex $u$, set $b_{u,u}=3$.
+  %
+  We set $m$, the number of cliques, to be $6\ell + q$.
+
+  (X3C Yes-instance $\to$ Problem (3) Yes-instance)
+  WLOG assume that $S_1,S_2,\ldots,S_q$ is a solution to X3C.
+  %
+  For each $1 \leq i \leq q$, take the 7 cliques
+  $\{a_i, b_i, c_i\}, \{u, u', a_i\}, \{v, v', b_i\}, \{w, w', c_i\}, \{v, a_i\}, \{w, b_i\}, \{u, c_i\}$
+  into the solution.
+  %
+  For each $q < i \leq \ell$, take the 6 cliques
+  $\{v, a_i, b_i\}, \{w, b_i, c_i\}, \{u, c_i, a_i\}, \{u', a_i\}, \{v', b_i\}, \{w', c_i\}$
+  into the solution.
+  %
+  This is a valid solution for Problem (3);
+  there are $7q + 6(\ell - q) = 6\ell + q$ cliques.
+  %
+  Let $x=|\{S_i: q < i \leq \ell, u \in S_i \}|$.
+  Element-vertex $u$ is included in $2 + x$ cliques,
+  while $\deg_G(u)=3+2x$, satisfying $b_{u,u}=(\deg_G(u)+1)/2$.
+  Element-vertex $u'$ is included in $1 + x$ cliques,
+  while $\deg_G(u')=2+x$, satisfying $b_{u',u'}=\deg_G(u')-1$.
+  %
+  Each set-vertex $a_i$ ($b_i, c_i$) is included in exactly 3 cliques whether $i \leq q$ or not.
+  Every edge in $G$ is covered by exactly one clique.
+
+  (Problem (3) Yes-instance $\to$ X3C Yes-instance)
+  For each $1 \leq i \leq \ell$, define\newline
+  $E_i=\{a_ib_i, b_ic_i, c_ia_i, a_iu, a_iu, a_iv, b_iv, b_iv', b_iw, c_iw, c_iw', c_iu'\}$, the edges \textit{exclusive} to the set $S_i$.
+  Let $\mathcal{C}$ be the set of cliques in the solution to Problem (3) when interpreted as cliques.
+  Also, let $C_i=\{C \in \mathcal{C}: C \cap E_i \neq \emptyset\}$.
+  Observe that if $C_i$ contains a clique including any element edge $uu'$, then $|C_i|\geq 7$,
+  and $|C_i|\geq 6$, otherwise. It is easy to see $C_i \cap C_j=\emptyset$ for distinct $i,j$.
+  %
+  Since there are only $6\ell + q$ cliques, there are exactly $q$ sets that cover all element edges,
+  which gives the required solution for X3C.
 \end{proof}
 
 \begin{thm}\label{thm:hardness-unbounded}
